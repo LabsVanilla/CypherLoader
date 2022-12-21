@@ -9,8 +9,8 @@ namespace CypherLoader
 	{
 		// Token: 0x06000023 RID: 35 RVA: 0x000023D0 File Offset: 0x000005D0
 		private static void GetMethods()
-		{
-			Type modType = InternalConfig.ModType;
+		{ 
+			Type modType = InternalConfig.ModType; 
 			Core._onApplicationStart = ((modType != null) ? modType.GetMethod("OnApplicationStart") : null);
 			Core._onApplicationQuit = ((modType != null) ? modType.GetMethod("OnApplicationQuit") : null);
 			Core._onSceneWasLoaded = ((modType != null) ? modType.GetMethod("OnSceneWasLoaded") : null);

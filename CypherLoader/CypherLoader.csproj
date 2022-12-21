@@ -57,6 +57,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "C:\Users\Cypher\AppData\Roaming\HyperVanilla Labs\Cheats\VRChat" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "D:\SteamLibrary\steamapps\common\VRChat\Mods" /Y /I</PostBuildEvent>
   </PropertyGroup>
 </Project>

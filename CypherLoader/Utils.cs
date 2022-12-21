@@ -58,6 +58,8 @@ namespace CypherLoader
 					}
 				}
 				result = text;
+				if (text == null)
+				{ MelonLogger.Error("FAILED TO GET HWID"); }
 			}
 			return result;
 		}
@@ -115,7 +117,7 @@ namespace CypherLoader
 		}
 
 		// Token: 0x06000046 RID: 70 RVA: 0x00002B54 File Offset: 0x00000D54
-		internal static long GetCurrentTimeInEpoch()
+		internal static long GetRandomNumber()
 		{
 			return Convert.ToInt64((DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);
 		}

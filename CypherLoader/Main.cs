@@ -1,19 +1,21 @@
-﻿using System;
-using System.Net;
-using MelonLoader;
+﻿using MelonLoader;
+using MelonLoader.TinyJSON;
 using Newtonsoft.Json;
+using System;
+using System.Net;
+using System.Reflection;
 
 namespace CypherLoader
 {
-	// Token: 0x02000008 RID: 8
-	internal class LoaderMain
+    // Token: 0x02000008 RID: 8
+    internal class LoaderMain : MelonMod
     {
-		// Token: 0x0600002F RID: 47 RVA: 0x0000252C File Offset: 0x0000072C
-		[Obsolete]
-		public static void OnApplicationStart()
-		{ HandleAppStart();  }
-            internal static void HandleAppStart()
-		{
+        // Token: 0x0600002F RID: 47 RVA: 0x0000252C File Offset: 0x0000072C
+        [Obsolete]
+        public override void OnApplicationStart()
+        { HandleAppStart(); }
+        internal static void HandleAppStart()
+        {
             try
             {
                 if (!Utils.GetCommandLine().Contains("--melonloader.debug"))
@@ -44,11 +46,6 @@ namespace CypherLoader
                             return;
                         }
                         LoaderMain.GameData = JsonConvert.DeserializeObject<GameController>(text);
-                        if (LoaderMain.GameData.status == 1)
-                        {
-                            Utils.Log("Cheat Offline Skipping Load...", ConsoleColor.Red);
-                            return;
-                        }
                         Utils.Log("Loading Cypher Engine For " + Utils.GetGameName());
                         if (LoaderMain.GameData.motd != null)
                         {
@@ -77,98 +74,98 @@ namespace CypherLoader
             }
         }
 
-		// Token: 0x06000030 RID: 48 RVA: 0x000022AC File Offset: 0x000004AC
-		[Obsolete]
-		public static void OnApplicationLateStart()
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnApplicationLateStart();
-			}
-		}
+        // Token: 0x06000030 RID: 48 RVA: 0x000022AC File Offset: 0x000004AC
+        [Obsolete]
+        public override void OnApplicationLateStart()
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnApplicationLateStart();
+            }
+        }
 
-		// Token: 0x06000031 RID: 49 RVA: 0x000022BA File Offset: 0x000004BA
-		public static void OnLateUpdate()
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnLateUpdate();
-			}
-		}
+        // Token: 0x06000031 RID: 49 RVA: 0x000022BA File Offset: 0x000004BA
+        public override void OnLateUpdate()
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnLateUpdate();
+            }
+        }
 
-		// Token: 0x06000032 RID: 50 RVA: 0x000022C8 File Offset: 0x000004C8
-		public static void OnSceneWasLoaded(int level, string name)
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnSceneWasLoaded(level, name);
-			}
-		}
+        // Token: 0x06000032 RID: 50 RVA: 0x000022C8 File Offset: 0x000004C8
+        public override void OnSceneWasLoaded(int level, string name)
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnSceneWasLoaded(level, name);
+            }
+        }
 
-		// Token: 0x06000033 RID: 51 RVA: 0x000022D8 File Offset: 0x000004D8
-		public static void OnGUI()
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnGUI();
-			}
-		}
+        // Token: 0x06000033 RID: 51 RVA: 0x000022D8 File Offset: 0x000004D8
+        public override void OnGUI()
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnGUI();
+            }
+        }
 
-		// Token: 0x06000034 RID: 52 RVA: 0x000022E6 File Offset: 0x000004E6
-		public static void OnPreferencesSaved()
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnPreferencesSaved();
-			}
-		}
+        // Token: 0x06000034 RID: 52 RVA: 0x000022E6 File Offset: 0x000004E6
+        public override void OnPreferencesSaved()
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnPreferencesSaved();
+            }
+        }
 
-		// Token: 0x06000035 RID: 53 RVA: 0x000022F4 File Offset: 0x000004F4
-		public static void OnFixedUpdate()
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnFixedUpdate();
-			}
-		}
+        // Token: 0x06000035 RID: 53 RVA: 0x000022F4 File Offset: 0x000004F4
+        public override void OnFixedUpdate()
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnFixedUpdate();
+            }
+        }
 
-		// Token: 0x06000036 RID: 54 RVA: 0x00002302 File Offset: 0x00000502
-		public static void OnUpdate()
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnUpdate();
-			}
-		}
+        // Token: 0x06000036 RID: 54 RVA: 0x00002302 File Offset: 0x00000502
+        public override void OnUpdate()
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnUpdate();
+            }
+        }
 
-		// Token: 0x06000037 RID: 55 RVA: 0x00002310 File Offset: 0x00000510
-		public static void OnApplicationQuit()
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnApplicationQuit();
-			}
-		}
+        // Token: 0x06000037 RID: 55 RVA: 0x00002310 File Offset: 0x00000510
+        public override void OnApplicationQuit()
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnApplicationQuit();
+            }
+        }
 
-		// Token: 0x06000038 RID: 56 RVA: 0x0000231E File Offset: 0x0000051E
-		public static void OnSceneWasUnloaded(int level, string name)
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnSceneWasUnloaded(level, name);
-			}
-		}
+        // Token: 0x06000038 RID: 56 RVA: 0x0000231E File Offset: 0x0000051E
+        public override void OnSceneWasUnloaded(int level, string name)
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnSceneWasUnloaded(level, name);
+            }
+        }
 
-		// Token: 0x06000039 RID: 57 RVA: 0x0000232E File Offset: 0x0000052E
-		public static void OnSceneWasInitialized(int level, string name)
-		{
-			if (InternalConfig.IsLoaded)
-			{
-				Core.OnSceneWasInitialized(level, name);
-			}
-		}
+        // Token: 0x06000039 RID: 57 RVA: 0x0000232E File Offset: 0x0000052E
+        public override void OnSceneWasInitialized(int level, string name)
+        {
+            if (InternalConfig.IsLoaded)
+            {
+                Core.OnSceneWasInitialized(level, name);
+            }
+        }
 
-		// Token: 0x0400001E RID: 30
-		internal static GameController GameData;
-	}
+        // Token: 0x0400001E RID: 30
+        internal static GameController GameData;
+    }
 }
