@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("CypherLoader")]
-[assembly: AssemblyCopyright("Copyright © HyperVanilla Labs 2022")]
+[assembly: AssemblyCopyright("Copyright © Vanilla Labs 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
 [assembly: MelonPriority(-99)]

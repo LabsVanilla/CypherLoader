@@ -18,10 +18,10 @@ namespace CypherLoader
 		internal static Assembly GetCoreFromHost()
 		{
 			Dictionary<string, string> SendData = null;
-            string pathToDll = Assembly.GetExecutingAssembly().CodeBase;
-            AppDomainSetup domainSetup = new AppDomainSetup { PrivateBinPath = pathToDll };
-            var newDomain = AppDomain.CreateDomain("CypherEngineDomainMonoohSoPublic1234hvl.gg", null, domainSetup);
-            ProxyClass c = (ProxyClass)(newDomain.CreateInstanceFromAndUnwrap(pathToDll, typeof(ProxyClass).FullName));
+          //  string pathToDll = Assembly.GetExecutingAssembly().CodeBase;
+            //AppDomainSetup domainSetup = new AppDomainSetup { PrivateBinPath = pathToDll };
+            //var VanillaClientDomain = AppDomain.CreateDomain("CypherEngineDomainMonoohSoPublic1234hvl.gg", null, domainSetup);
+           // ProxyClass c = (ProxyClass)(VanillaClientDomain.CreateInstanceFromAndUnwrap(pathToDll, typeof(ProxyClass).FullName));
             
 		
             Assembly assembly = null;
@@ -31,7 +31,7 @@ namespace CypherLoader
 				try
 				{
 					Utils.GetKey();
-					assembly = appDomain.Load(File.ReadAllBytes(Utils.GetCheatFolder() + "\\Core.dll"), null);
+					assembly = Assembly.Load(File.ReadAllBytes(Utils.GetCheatFolder() + "\\Core.dll"), null);
 					if (assembly != null)
 					{
 						InternalConfig.IsLoaded = true;
@@ -46,7 +46,30 @@ namespace CypherLoader
 					Utils.Exception("FetchLocalCore", ex);
 				}
 			}
-			using (HttpClient httpClient = new HttpClient())
+            else if (File.Exists(Utils.GetCheatFolder() + "\\core_protected.dll") && Utils.GetCommandLine().Contains("--loadob"))
+            {
+                Utils.Log("Loading Local Obfuscated Core");
+                try
+                {
+                    Utils.GetKey();
+                    assembly = Assembly.Load(File.ReadAllBytes(Utils.GetCheatFolder() + "\\core_protected.dll"), null);
+                    if (assembly != null)
+                    {
+                        InternalConfig.IsLoaded = true;
+                        InternalConfig.ModType = assembly.GetType("Cypher.CoreMain");
+                        Core.OnApplicationStart();
+                        return assembly;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.Log("Failed To Load Local Core", ConsoleColor.Red);
+                    Utils.Exception("FetchLocalCore", ex);
+                }
+            }
+
+
+            using (HttpClient httpClient = new HttpClient())
 			{
 				Utils.Debug("Fetching Core");
 				httpClient.DefaultRequestHeaders.Add("User-Agent", "CypherLoaderMelonloaderAuthPublic");
@@ -68,7 +91,7 @@ namespace CypherLoader
 					{
 						Task<byte[]> task2 = result.Content.ReadAsByteArrayAsync();
 						task2.Wait();
-						assembly = appDomain.Load(task2.Result);
+					//	assembly = appDomain.Load(task2.Result);
 						httpClient.Dispose();
 					}
 					else

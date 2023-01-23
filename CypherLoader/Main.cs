@@ -6,8 +6,10 @@ using System.Net;
 using System.Reflection;
 
 namespace CypherLoader
+
 {
     // Token: 0x02000008 RID: 8
+    [Obfuscation(Feature = "-rename")]
     internal class LoaderMain : MelonMod
     {
         // Token: 0x0600002F RID: 47 RVA: 0x0000252C File Offset: 0x0000072C
@@ -32,7 +34,7 @@ namespace CypherLoader
                     {
                         InternalConfig.Verbose = true;
                     }
-                    Utils.Log("By Using This Loader You Agree To HyperVoid Labs TOS");
+                    Utils.Log("By Using This Loader You Agree To Vanilla Labs TOS");
                     Utils.Log("TOS available at https://hvl.gg/tos");
                     WebClient webClient = new WebClient();
                     try

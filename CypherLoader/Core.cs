@@ -10,8 +10,8 @@ namespace CypherLoader
 		// Token: 0x06000023 RID: 35 RVA: 0x000023D0 File Offset: 0x000005D0
 		private static void GetMethods()
 		{ 
-			Type modType = InternalConfig.ModType; 
-			Core._onApplicationStart = ((modType != null) ? modType.GetMethod("OnApplicationStart") : null);
+			Type modType = InternalConfig.ModType;
+            Core._onApplicationStart = ((modType != null) ? modType.GetMethod("OnApplicationStart") : null);
 			Core._onApplicationQuit = ((modType != null) ? modType.GetMethod("OnApplicationQuit") : null);
 			Core._onSceneWasLoaded = ((modType != null) ? modType.GetMethod("OnSceneWasLoaded") : null);
 			Core._onSceneWasUnloaded = ((modType != null) ? modType.GetMethod("OnSceneWasUnloaded") : null);
@@ -22,17 +22,21 @@ namespace CypherLoader
 			Core._OnGUI = modType.GetMethod("OnGUI");
 			Core._OnPreferencesSaved = modType.GetMethod("OnPreferencesSaved");
 			Core._OnFixedUpdate = modType.GetMethod("OnFixedUpdate");
-		}
+          
+        }
 
 		// Token: 0x06000024 RID: 36 RVA: 0x000024CC File Offset: 0x000006CC
 		internal static void OnApplicationStart()
 		{
 			Core.GetMethods();
-			if (Core._onApplicationStart != null)
+
+            if (Core._onApplicationStart != null)
 			{
-				Core._onApplicationStart.Invoke(null, new object[]
+				Console.WriteLine("Invokeing OAS");
+                Core._onApplicationStart.Invoke(null, new object[]
 				{
-					((GuidAttribute)typeof(LoaderMain).Assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0]).Value
+                     
+                ((GuidAttribute)typeof(LoaderMain).Assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0]).Value
 				});
 			}
 		}

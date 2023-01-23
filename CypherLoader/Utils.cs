@@ -24,17 +24,17 @@ namespace CypherLoader
 		// Token: 0x0600003E RID: 62 RVA: 0x000029A0 File Offset: 0x00000BA0
 		internal static string GetKey()
 		{
-			if (!File.Exists(Utils.GetMainFolder() + "\\HyperVanilla.Auth"))
+			if (!File.Exists(Utils.GetMainFolder() + "\\Vanilla.Auth"))
 			{
-				File.Create(Utils.GetMainFolder() + "\\HyperVanilla.Auth").Close();
+				File.Create(Utils.GetMainFolder() + "\\Vanilla.Auth").Close();
 			}
-			if (new FileInfo(Utils.GetMainFolder() + "\\HyperVanilla.Auth").Length <= 0L)
+			if (new FileInfo(Utils.GetMainFolder() + "\\Vanilla.Auth").Length <= 0L)
 			{
 				Utils.Log("Please Enter Your AuthKey");
 				string text = Console.ReadLine();
-				File.WriteAllText(Utils.GetMainFolder() + "\\HyperVanilla.Auth", text.Trim());
+				File.WriteAllText(Utils.GetMainFolder() + "\\Vanilla.Auth", text.Trim());
 			}
-			return File.ReadAllText(Utils.GetMainFolder() + "\\HyperVanilla.Auth").Trim();
+			return File.ReadAllText(Utils.GetMainFolder() + "\\Vanilla.Auth").Trim();
 		}
 
 		// Token: 0x0600003F RID: 63 RVA: 0x00002A3C File Offset: 0x00000C3C
@@ -92,7 +92,7 @@ namespace CypherLoader
 		// Token: 0x06000043 RID: 67 RVA: 0x00002ACC File Offset: 0x00000CCC
 		internal static string GetMainFolder()
 		{
-			string text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HyperVanilla Labs");
+			string text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vanilla");
 			if (!Directory.Exists(text))
 			{
 				Directory.CreateDirectory(text);
